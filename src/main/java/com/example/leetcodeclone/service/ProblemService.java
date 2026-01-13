@@ -20,6 +20,9 @@ public class ProblemService {
     @Transactional(readOnly = true)
     public Page<Problem> list(Pageable pageable) { return problemRepository.findAll(pageable); }
 
+    @Transactional(readOnly = true)
+    public java.util.List<Problem> listAll() { return problemRepository.findAll(); }
+
     @Transactional
     public Problem create(Problem p) { return problemRepository.save(p); }
 

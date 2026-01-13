@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Submission</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 2rem; }
+        form { display: grid; gap: .8rem; max-width: 720px; }
+        label { font-weight: 600; }
+        select, textarea { padding: .4rem .6rem; border: 1px solid #ccc; }
+        textarea { min-height: 220px; }
+        .actions { display:flex; gap:.5rem; }
+        a.button, button { padding:.4rem .8rem; border:1px solid #ccc; background:#fafafa; cursor:pointer; text-decoration:none; }
+    </style>
+</head>
+<body>
+<h1>New Submission</h1>
+
+<form th:object="${submission}" th:action="@{/submissions}" method="post">
+    <div>
+        <label>User</label><br>
+        <select th:field="*{user}" required>
+            <option value="">-- select user --</option>
+            <option th:each="u : ${users}" th:value="${u.userId}" th:text="${u.username}"></option>
+        </select>
+    </div>
+    <div>
+        <label>Problem</label><br>
+        <select th:field="*{problem}" required>
+            <option value="">-- select problem --</option>
+            <option th:each="p : ${problems}" th:value="${p.id}" th:text="${p.title}"></option>
+        </select>
+    </div>
+    <div>
+        <label>Status</label><br>
+        <select th:field="*{status}">
+            <option value="PENDING">PENDING</option>
+            <option value="ACCEPTED">ACCEPTED</option>
+            <option value="WRONG_ANSWER">WRONG_ANSWER</option>
+            <option value="RUNTIME_ERROR">RUNTIME_ERROR</option>
+        </select>
+    </div>
+    <div>
+        <label>Code</label><br>
+        <textarea th:field="*{code}" placeholder="Paste solution code..."></textarea>
+    </div>
+    <div class="actions">
+        <button type="submit">Submit</button>
+        <a class="button" th:href="@{/submissions}">Cancel</a>
+    </div>
+</form>
+</body>
+</html>

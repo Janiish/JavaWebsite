@@ -22,6 +22,11 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
+    @Transactional(readOnly = true)
+    public java.util.List<User> listAll() {
+        return userRepository.findAll();
+    }
+
     @Transactional
     public User create(User user) {
         return userRepository.save(user);
