@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Problems</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 2rem; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f5f5f5; text-align: left; }
+        .actions { display: flex; gap: .5rem; }
+        .topbar { display:flex; justify-content: space-between; align-items:center; margin-bottom:1rem; }
+        a.button, button { padding:.4rem .8rem; border:1px solid #ccc; background:#fafafa; cursor:pointer; text-decoration:none; }
+    </style>
+</head>
+<body>
+<div class="topbar">
+    <h1>Problems</h1>
+    <a class="button" th:href="@{/problems/new}">New Problem</a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Difficulty</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${problems.content}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.title}"></td>
+        <td th:text="${p.difficulty}"></td>
+        <td class="actions">
+            <a class="button" th:href="@{'/problems/' + ${p.id} + '/edit'}">Edit</a>
+            <form th:action="@{'/problems/' + ${p.id} + '/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div style="margin-top:1rem;">
+    <span th:text="'Page ' + ${problems.number + 1} + ' of ' + ${problems.totalPages}"></span>
+    <div style="float:right; display:flex; gap:.5rem;">
+        <a class="button" th:if="${problems.hasPrevious()}" th:href="@{'/problems'(page=${problems.number - 1},size=${size})}">Prev</a>
+        <a class="button" th:if="${problems.hasNext()}" th:href="@{'/problems'(page=${problems.number + 1},size=${size})}">Next</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${mode == 'create'} ? 'Create Problem' : 'Edit Problem'"></title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 2rem; }
+        form { display: grid; gap: .8rem; max-width: 600px; }
+        label { font-weight: 600; }
+        input, textarea, select { padding: .4rem .6rem; border: 1px solid #ccc; }
+        textarea { min-height: 160px; }
+        .actions { display:flex; gap:.5rem; }
+        a.button, button { padding:.4rem .8rem; border:1px solid #ccc; background:#fafafa; cursor:pointer; text-decoration:none; }
+    </style>
+</head>
+<body>
+<h1 th:text="${mode == 'create'} ? 'Create Problem' : 'Edit Problem'"></h1>
+
+<form th:object="${problem}" th:action="${mode == 'create'} ? @{/problems} : @{'/problems/' + ${problem.id}}" method="post">
+    <div>
+        <label>Title</label><br>
+        <input type="text" th:field="*{title}" required>
+    </div>
+    <div>
+        <label>Difficulty</label><br>
+        <select th:field="*{difficulty}">
+            <option value="EASY">EASY</option>
+            <option value="MEDIUM">MEDIUM</option>
+            <option value="HARD">HARD</option>
+        </select>
+    </div>
+    <div>
+        <label>Description</label><br>
+        <textarea th:field="*{description}"></textarea>
+    </div>
+
+    <div class="actions">
+        <button type="submit" th:text="${mode == 'create'} ? 'Create' : 'Save'"></button>
+        <a class="button" th:href="@{/problems}">Cancel</a>
+    </div>
+</form>
+</body>
+</html>

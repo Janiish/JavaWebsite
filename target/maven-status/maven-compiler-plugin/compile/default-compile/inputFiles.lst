@@ -1,7 +1,16 @@
 P:\Website\src\main\java\com\example\leetcodeclone\LeetcodeCloneApplication.java
+P:\Website\src\main\java\com\example\leetcodeclone\model\Problem.java
+P:\Website\src\main\java\com\example\leetcodeclone\model\Submission.java
 P:\Website\src\main\java\com\example\leetcodeclone\model\User.java
+P:\Website\src\main\java\com\example\leetcodeclone\repository\ProblemRepository.java
+P:\Website\src\main\java\com\example\leetcodeclone\repository\SubmissionRepository.java
 P:\Website\src\main\java\com\example\leetcodeclone\repository\UserRepository.java
+P:\Website\src\main\java\com\example\leetcodeclone\service\ProblemService.java
+P:\Website\src\main\java\com\example\leetcodeclone\service\SubmissionService.java
 P:\Website\src\main\java\com\example\leetcodeclone\service\UserService.java
 P:\Website\src\main\java\com\example\leetcodeclone\web\HealthController.java
+P:\Website\src\main\java\com\example\leetcodeclone\web\ProblemController.java
+P:\Website\src\main\java\com\example\leetcodeclone\web\ProblemPageController.java
+P:\Website\src\main\java\com\example\leetcodeclone\web\SubmissionController.java
 P:\Website\src\main\java\com\example\leetcodeclone\web\UserController.java
 P:\Website\src\main\java\com\example\leetcodeclone\web\UserPageController.java
