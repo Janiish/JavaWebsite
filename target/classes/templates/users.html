@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 2rem; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f5f5f5; text-align: left; }
+        .actions { display: flex; gap: .5rem; }
+        .topbar { display:flex; justify-content: space-between; align-items:center; margin-bottom:1rem; }
+        a.button, button { padding:.4rem .8rem; border:1px solid #ccc; background:#fafafa; cursor:pointer; text-decoration:none; }
+    </style>
+</head>
+<body>
+<div class="topbar">
+    <h1>Users</h1>
+    <a class="button" th:href="@{/users/new}">New User</a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="u : ${users.content}">
+        <td th:text="${u.userId}"></td>
+        <td th:text="${u.username}"></td>
+        <td th:text="${u.email}"></td>
+        <td class="actions">
+            <a class="button" th:href="@{'/users/' + ${u.userId} + '/edit'}">Edit</a>
+            <form th:action="@{'/users/' + ${u.userId} + '/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div style="margin-top:1rem;">
+    <span th:text="'Page ' + ${users.number + 1} + ' of ' + ${users.totalPages}"></span>
+    <div style="float:right; display:flex; gap:.5rem;">
+        <a class="button" th:if="${users.hasPrevious()}" th:href="@{'/users'(page=${users.number - 1},size=${size})}">Prev</a>
+        <a class="button" th:if="${users.hasNext()}" th:href="@{'/users'(page=${users.number + 1},size=${size})}">Next</a>
+    </div>
+</div>
+</body>
+</html>

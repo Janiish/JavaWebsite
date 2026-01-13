@@ -11,11 +11,11 @@ import java.util.Map;
 public class HealthController {
 
     @GetMapping
-    public Map<String, Object> health() {
-        return Map.of(
-                "status", "OK",
-                "service", "leetcode-clone",
-                "version", 1
-        );
+    public Map<String, String> health() {
+        java.util.Map<String, String> result = new java.util.HashMap<>();
+        result.put("status", "OK");
+        result.put("service", "leetcode-clone");
+        result.put("version", "1");
+        return result;
     }
 }
